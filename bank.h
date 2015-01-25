@@ -50,6 +50,8 @@ public:
 		return null;
 	}*/
 	BankAccount findByNameAndDOB(std::string name, std::string dob);
+	BankAccount* getPtrByNameAndDOB(std::string name, std::string dob);
+	BankAccount* getPtrByNumber(long number);
 };
 
 #endif // BANK_H

@@ -39,6 +39,9 @@
     void BankAccount::change_password(std::string new_password){
         password = new_password;
     }
+    void BankAccount::change_owner(std::string new_owner) {
+        owner_name = new_owner;
+    }
     long BankAccount::getNumber() {
         return account_number;
     }

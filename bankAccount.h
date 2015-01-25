@@ -50,6 +50,7 @@ public:
     void change_password(std::string new_password);/*{
         password = new_password;
     }*/
+    void change_owner(std::string new_owner);
     long getNumber();
 };
 

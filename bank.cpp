@@ -45,16 +45,16 @@ void Bank::closeBankAccount(std::string name, std::string dob, std::string passw
 }
 void Bank::deposit(long accountNumber, double amount) {
         for (int i = 0; i < (this->accounts).size(); i++) {
-            BankAccount currentAcct = (this->accounts)[i];
-            if (currentAcct.getNumber() == accountNumber)
-				currentAcct.deposit(amount);
+            BankAccount* currentAcctPtr = &(this->accounts)[i];
+            if (currentAcctPtr->getNumber() == accountNumber)
+				currentAcctPtr->deposit(amount);
         }
 	}
 void Bank::withdraw(long accountNumber, std::string password, double amount) {
 		for (int i = 0; i < (this->accounts).size(); i++) {
-            BankAccount currentAcct = (this->accounts)[i];
-            if(currentAcct.getNumber() == accountNumber && currentAcct.get_password() == password)
-				currentAcct.withdraw(amount);
+            BankAccount* currentAcctPtr = &(this->accounts)[i];
+            if(currentAcctPtr->getNumber() == accountNumber && currentAcctPtr->get_password() == password)
+				currentAcctPtr->withdraw(amount);
 		}
 	}
 double Bank::checkBalance(BankAccount b) {
@@ -70,9 +70,24 @@ BankAccount Bank::findByNumber(long number) {
 	}
 BankAccount Bank::findByNameAndDOB(std::string name, std::string dob) {
     for (int i = 0; i < (this->accounts).size(); i++) {
-            BankAccount currentAcct = (this->accounts)[i];
-                if(currentAcct.get_owner() == name && currentAcct.get_owner_DOB() == dob)
-                    return currentAcct;
+            BankAccount* currentAcctPtr = &(this->accounts)[i];
+                if(currentAcctPtr->get_owner() == name && currentAcctPtr->get_owner_DOB() == dob)
+                    return *currentAcctPtr;
 		}
 //		return NULL;
 	}
+BankAccount* Bank::getPtrByNameAndDOB(std::string name, std::string dob) {
+    for (int i = 0; i < (this->accounts).size(); i++) {
+            BankAccount* currentAcctPtr = &(this->accounts)[i];
+                if(currentAcctPtr->get_owner() == name && currentAcctPtr->get_owner_DOB() == dob)
+                    return currentAcctPtr;
+    }
+//		return NULL;
+}
+BankAccount* Bank::getPtrByNumber(long number) {
+    for (int i = 0; i < (this->accounts).size(); i++) {
+            BankAccount* currentAcctPtr = &(this->accounts)[i];
+                if(currentAcctPtr->getNumber() == number)
+                    return currentAcctPtr;
+		}
+}
