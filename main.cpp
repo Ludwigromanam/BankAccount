@@ -5,109 +5,23 @@
 using namespace std;
 
 void displayMessage(){
-		string s = "Hello, and welcome to Rui's Bank. Press any key to Continue:\n[1] Open New Bank Account\n[2] Close Your Bank Account\n[3] Deposit Money\n[4] Withdraw Money\n[5] Change Your Password\n[6] Add Authorized Persons to Your Account\n[7] Remove Authorized Persons to Your Account\n[8] Transfer Money to Another Account\n[9] Change Account Ownership\nPress any other key to exit.";
+		string s = "Hello, and welcome to Rui's Bank. Press any key to Continue:\n[1] Open New Bank Account\n[2] Close Your Bank Account\n[3] Deposit Money\n[4] Withdraw Money\n[5] Change Your Password\n[6] Transfer Money to Another Account\n[7] Change Account Ownership\nPress any other key to exit.\n";
 		cout << s;
-	}
-	//public static void main(String[]args){
-		//use dowhile loop
-/*		Bank* myBankPtr = new Bank("Nameless Bank",100000000000, true);
-
-		//Scanner in = new Scanner(System.in);
-
-		boolean goAgain = true;
-		do{
-            myBankptr->displayMessage();
-            int choice;
-            cin << choice;
-            switch(choice){
-            case 1: {cout << "Enter Your First Name:";
-				string firstName;
-				cin >> firstName;
-				cout << "Enter Your Last Name:";
-				string lastName;
-				cin >> lastName;
-				/*cout << "Enter Your Birth Year:";
-				int year;
-				cin >> year;
-				System.out.println("Enter Your Birth Month in Number (1-12):");
-				int month = in.nextInt();
-				System.out.println("Enter Your Birth Day of the Month (1-31):");
-				int day = in.nextInt();
-				Person owner = new Person(firstName, lastName, new Date(year, month, day));
-				string dob;
-				cout << "Enter your date of birth (mm-dd-yyyy):";
-				cin >> dob;
-				cout << "Choose a Password:";
-				string password;
-				cin >> password;
-				//String password = in.nextLine();
-				//BankAccount* bPtr = new BankAccount(password, owner, )
-
-		}
-				+ " myBank.openBankAccount(null, null, null); break;}
-		case 2: myBank.closeAccount(); break;
-
-
-		}
-		}while(goAgain);
-		//Accept User input and do stuff
-		//
-	}
-
-*/
+}
 int main()
 {
-        /*Bank* myBankPtr = new Bank("Nameless Bank",100000000000, true);
-
-		//Scanner in = new Scanner(System.in);
-
-		bool goAgain = true;
-		do{
-            myBankptr->displayMessage();
-            int choice;
-            cin << choice;
-            switch(choice){
-            case 1: {cout << "Enter Your First Name:";
-				string firstName;
-				cin >> firstName;
-				cout << "Enter Your Last Name:";
-				string lastName;
-				cin >> lastName;
-				/*cout << "Enter Your Birth Year:";
-				int year;
-				cin >> year;
-
-				string dob;
-				cout << "Enter your date of birth (mm-dd-yyyy):";
-				cin >> dob;
-				cout << "Choose a Password:";
-				string password;
-				cin >> password;
-				//String password = in.nextLine();
-				//BankAccount* bPtr = new BankAccount(password, owner, )
-
-		}
-				+ " myBank.openBankAccount(null, null, null); break;}
-		case 2: myBank.closeAccount(); break;
-
-
-		}
-		}while(goAgain);*/
     Bank* myBankPtr = new Bank("Nameless Bank",100000000000, true);
     bool goAgain = true;
-    //BankAccountRunner* bkAcctRunner = new BankAccountRunner();
-    //bkAcctRunner->displayMessage();
-    //displayMessage();
     do{
             displayMessage();
             int choice;
             cin >> choice;
             switch(choice){
-            case 1: {
-                cout << "Enter Your First Name:";
+            case 1: { //open account
+                cout << "Enter Your First Name: ";
 				string firstName;
 				cin >> firstName;
-				cout << "Enter Your Last Name:";
+				cout << "Enter Your Last Name: ";
 				string lastName;
 				cin >> lastName;
 				/*cout << "Enter Your Birth Year:";
@@ -115,24 +29,76 @@ int main()
 				cin >> year;
                 */
 				string dob;
-				cout << "Enter your date of birth (mm-dd-yyyy):";
+				cout << "Enter your date of birth (mm-dd-yyyy): ";
 				cin >> dob;
-				cout << "Choose a Password:";
+				cout << "Choose a Password: ";
 				string password;
 				cin >> password;
 				myBankPtr->openBankAccount(firstName + " " + lastName,dob,password,123456789);
 				//generate bank account number later
-				//String password = in.nextLine();
-				//BankAccount* bPtr = new BankAccount(password, owner, )
+				//cout << myBankPtr->getAccounts().size() << endl;
 				break;
             }
-				//+ " myBank.openBankAccount(null, null, null); break;}
-            case 2: /*myBank.closeAccount();*/{ goAgain = false; break;}
+            case 2: { //close account
+                cout << "Enter Your First Name: ";
+				string firstName;
+				cin >> firstName;
+				cout << "Enter Your Last Name: ";
+				string lastName;
+				cin >> lastName;
+				/*cout << "Enter Your Birth Year:";
+				int year;
+				cin >> year;
+                */
+				string dob;
+				cout << "Enter your date of birth (mm-dd-yyyy): ";
+				cin >> dob;
+				bool hasPassword = false;
+				string password;
+				for(int i = 0; i < 3; i++) {
+                    cout << "Enter your Password: ";
+                    cin >> password;
+                    if(myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).get_password() == password) {
+                        hasPassword = true;
+                        break;
+                    } else if(i < 2) {
+                        cout << "You have entered your password incorrectly." << endl;
+                        cout << "You have ";
+                        cout << 2 - i;
+                        cout << " attempts left before you must try again later." << endl;
+                    }
+                }
+                if(!hasPassword) {
+                    cout << "You have run out of attempts to enter in your password. Try again later." << endl;
+                    break;
+                }
+				myBankPtr->closeBankAccount(firstName + " " + lastName,dob,password,123456789);
+				//deal with bank account number later
+                //goAgain = false;
+                cout << "Account Closed" << endl;
+                //cout << myBankPtr->getAccounts().size() << endl;
+                break;
+            }
+            case 3: { //deposit money
 
+                break;
+            }
+            case 4: { //withdraw money
+                break;
+            }
+            case 5: { //change password
+                break;
+            }
+            case 6: { //transfer money to another account
+                break;
+            }
+            case 7: { //change account ownership
+                break;
             }
             default: {
                 goAgain = false;
                 break;
+            }
             }
 		}while(goAgain);
     cout << myBankPtr->getBalance() << endl;
