@@ -8,6 +8,7 @@ using namespace std;
 /*long getBankAccountNumber() {
     return rand() % 100000000;
 }*/
+//if we do random number generator, we'll have to check for repeats, so instead lets just increment consecutively up from 100000000
 void displayMessage(){
 		string s = "Hello, and welcome to Rui's Bank. Press any key to Continue:\n[1] Open New Bank Account\n[2] Close Your Bank Account\n[3] Deposit Money\n[4] Withdraw Money\n[5] Change Your Password\n[6] Transfer Money to Another Account\n[7] Change Account Ownership\nPress any other key to exit.\n";
 		cout << s;
