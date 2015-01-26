@@ -5,10 +5,9 @@
 #include <cstdlib>
 using namespace std;
 
-long getBankAccountNumber() {
+/*long getBankAccountNumber() {
     return rand() % 100000000;
-}
-
+}*/
 void displayMessage(){
 		string s = "Hello, and welcome to Rui's Bank. Press any key to Continue:\n[1] Open New Bank Account\n[2] Close Your Bank Account\n[3] Deposit Money\n[4] Withdraw Money\n[5] Change Your Password\n[6] Transfer Money to Another Account\n[7] Change Account Ownership\nPress any other key to exit.\n";
 		cout << s;
@@ -16,6 +15,7 @@ void displayMessage(){
 int main()
 {
     Bank* myBankPtr = new Bank("Nameless Bank",100000000000, true);
+    long account_number = 10000000;
     bool goAgain = true;
     do{
             displayMessage();
@@ -43,7 +43,7 @@ int main()
 				cin >> password;
 				long acctNum = getBankAccountNumber();
 				cout << acctNum << endl;
-				myBankPtr->openBankAccount(firstName + " " + lastName,dob,password,acctNum);
+				myBankPtr->openBankAccount(firstName + " " + lastName,dob,password,++account_number);
 				//generate bank account number later
 				//cout << myBankPtr->getAccounts().size() << endl;
 				break;
