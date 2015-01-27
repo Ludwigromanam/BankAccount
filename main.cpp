@@ -82,8 +82,8 @@ int main()
                     cout << "You have run out of attempts to enter in your password. Try again later." << endl;
                     break;
                 }
-				myBankPtr->closeBankAccount(firstName + " " + lastName,dob,password,123456789);
-				//deal with bank account number later
+                		long acct_num = myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).getNumber();
+				myBankPtr->closeBankAccount(firstName + " " + lastName,dob,password,acct_num);
                 //goAgain = false;
                 cout << "Account Closed" << endl;
                 //cout << myBankPtr->getAccounts().size() << endl;
