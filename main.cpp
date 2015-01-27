@@ -42,9 +42,10 @@ int main()
 				cout << "Choose a Password: ";
 				string password;
 				cin >> password;
-				long acctNum = getBankAccountNumber();
-				cout << acctNum << endl;
+				//long acctNum = getBankAccountNumber();
+				//cout << acctNum << endl;
 				myBankPtr->openBankAccount(firstName + " " + lastName,dob,password,++account_number);
+				cout << "Your account number is: " << account_number << endl;
 				//generate bank account number later
 				//cout << myBankPtr->getAccounts().size() << endl;
 				break;
@@ -90,25 +91,14 @@ int main()
                 break;
             }
             case 3: { //deposit money
-                cout << "Enter Your First Name: ";
-				string firstName;
-				cin >> firstName;
-				cout << "Enter Your Last Name: ";
-				string lastName;
-				cin >> lastName;
-				/*cout << "Enter Your Birth Year:";
-				int year;
-				cin >> year;
-                */
-				string dob;
-				cout << "Enter your date of birth (mm-dd-yyyy): ";
-				cin >> dob;
+                cout << "Enter your account number:";
+                cin >> account_number;
 				bool hasPassword = false;
 				string password;
 				for(int i = 0; i < 3; i++) {
                     cout << "Enter your Password: ";
                     cin >> password;
-                    if(myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).get_password() == password) {
+                    if(myBankPtr->findByNumber(account_number).get_password() == password) {
                         hasPassword = true;
                         break;
                     } else if(i < 2) {
@@ -125,30 +115,19 @@ int main()
                 double amount;
                 cout << "Enter an amount to deposit: ";
                 cin >> amount;
-				myBankPtr->deposit(myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).getNumber(),amount);
-                cout << "Thank you for the transaction. Your new balance is: " + myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).get_balance();
+				myBankPtr->deposit(account_number,amount);
+                cout << "Thank you for the transaction. Your new balance is: " << myBankPtr->findByNumber(account_number).get_balance() << endl;
                 break;
             }
             case 4: { //withdraw money
-                cout << "Enter Your First Name: ";
-				string firstName;
-				cin >> firstName;
-				cout << "Enter Your Last Name: ";
-				string lastName;
-				cin >> lastName;
-				/*cout << "Enter Your Birth Year:";
-				int year;
-				cin >> year;
-                */
-				string dob;
-				cout << "Enter your date of birth (mm-dd-yyyy): ";
-				cin >> dob;
+                cout << "Enter your account number:";
+                cin >> account_number;
 				bool hasPassword = false;
 				string password;
 				for(int i = 0; i < 3; i++) {
                     cout << "Enter your Password: ";
                     cin >> password;
-                    if(myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).get_password() == password) {
+                    if(myBankPtr->findByNumber(account_number).get_password() == password) {
                         hasPassword = true;
                         break;
                     } else if(i < 2) {
@@ -165,8 +144,8 @@ int main()
                 double amount;
                 cout << "Enter an amount to withdraw: ";
                 cin >> amount;
-				myBankPtr->withdraw(myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).getNumber(),password,amount);
-                cout <<"Thank you for the transaction. Your new balance is: " + myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).get_balance();
+				myBankPtr->withdraw(account_number,password,amount);
+                cout << "Thank you for the transaction. Your new balance is: " << myBankPtr->findByNumber(account_number).get_balance() << endl;
                 break;
             }
             case 5: { //change password
