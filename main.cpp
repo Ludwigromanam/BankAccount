@@ -126,7 +126,7 @@ int main()
                 cout << "Enter an amount to deposit: ";
                 cin >> amount;
 				myBankPtr->deposit(myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).getNumber(),amount);
-                //cout << myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).get_balance();
+                cout << "Thank you for the transaction. Your new balance is: " + myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).get_balance();
                 break;
             }
             case 4: { //withdraw money
@@ -166,7 +166,7 @@ int main()
                 cout << "Enter an amount to withdraw: ";
                 cin >> amount;
 				myBankPtr->withdraw(myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).getNumber(),password,amount);
-                //cout << myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).get_balance();
+                cout <<"Thank you for the transaction. Your new balance is: " + myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).get_balance();
                 break;
             }
             case 5: { //change password
