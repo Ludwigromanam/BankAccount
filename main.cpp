@@ -46,6 +46,9 @@ int main()
 				//cout << acctNum << endl;
 				myBankPtr->openBankAccount(firstName + " " + lastName,dob,password,++account_number);
 				cout << "Your account number is: " << account_number << endl;
+=======
+				cout<<"Your account number is: " + account_number;
+>>>>>>> origin/master
 				//generate bank account number later
 				//cout << myBankPtr->getAccounts().size() << endl;
 				break;
