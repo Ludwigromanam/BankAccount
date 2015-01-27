@@ -90,25 +90,14 @@ int main()
                 break;
             }
             case 3: { //deposit money
-                cout << "Enter Your First Name: ";
-				string firstName;
-				cin >> firstName;
-				cout << "Enter Your Last Name: ";
-				string lastName;
-				cin >> lastName;
-				/*cout << "Enter Your Birth Year:";
-				int year;
-				cin >> year;
-                */
-				string dob;
-				cout << "Enter your date of birth (mm-dd-yyyy): ";
-				cin >> dob;
+                cout << "Enter your account number:"
+                cin>> account_number
 				bool hasPassword = false;
 				string password;
 				for(int i = 0; i < 3; i++) {
                     cout << "Enter your Password: ";
                     cin >> password;
-                    if(myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).get_password() == password) {
+                    if(myBankPtr->findByNumber(account_number).get_password() == password) {
                         hasPassword = true;
                         break;
                     } else if(i < 2) {
@@ -130,25 +119,14 @@ int main()
                 break;
             }
             case 4: { //withdraw money
-                cout << "Enter Your First Name: ";
-				string firstName;
-				cin >> firstName;
-				cout << "Enter Your Last Name: ";
-				string lastName;
-				cin >> lastName;
-				/*cout << "Enter Your Birth Year:";
-				int year;
-				cin >> year;
-                */
-				string dob;
-				cout << "Enter your date of birth (mm-dd-yyyy): ";
-				cin >> dob;
+                cout << "Enter your account number:"
+                cin>> account_number
 				bool hasPassword = false;
 				string password;
 				for(int i = 0; i < 3; i++) {
                     cout << "Enter your Password: ";
                     cin >> password;
-                    if(myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).get_password() == password) {
+                    if(myBankPtr->findByNumber(account_number).get_password() == password) {
                         hasPassword = true;
                         break;
                     } else if(i < 2) {
