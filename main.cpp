@@ -10,7 +10,7 @@ using namespace std;
 }*/
 //if we do random number generator, we'll have to check for repeats, so instead lets just increment consecutively up from 100000000
 void displayMessage(){
-		string s = "Hello, and welcome to Rui's Bank. Press any key to Continue:\n[1] Open New Bank Account\n[2] Close Your Bank Account\n[3] Deposit Money\n[4] Withdraw Money\n[5] Change Your Password\n[6] Transfer Money to Another Account\n[7] Change Account Ownership\nPress any other key to exit.\n";
+		string s = "Hello, and welcome to Rui's Bank. Press any key to Continue:\n[1] Open New Bank Account\n[2] Close Your Bank Account\n[3] Deposit Money\n[4] Withdraw Money\n[5] Change Your Password\n[6] Transfer Money to Another Account\n[7] Change Account Ownership\n[8] Check Balance\nPress any other key to exit.\n";
 		cout << s;
 }
 int main()
@@ -51,6 +51,10 @@ int main()
 				break;
             }
             case 2: { //close account
+                long account_number;
+                cout << "Enter your account number: ";
+                cin >> account_number;
+                BankAccount* acctToDeletePtr = myBankPtr->getPtrByNumber(account_number);
                 cout << "Enter Your First Name: ";
 				string firstName;
 				cin >> firstName;
@@ -66,10 +70,17 @@ int main()
 				cin >> dob;
 				bool hasPassword = false;
 				string password;
+				string correctName = acctToDeletePtr->get_owner();
+				string correctPassword = acctToDeletePtr->get_password();
+				string correctDOB = acctToDeletePtr->get_owner_DOB();
+				if(correctName != (firstName + " " + lastName) && correctDOB != dob) {
+                    cout << "You have entered incorrect information. Try again later." << endl;
+                    break;
+				}
 				for(int i = 0; i < 3; i++) {
                     cout << "Enter your Password: ";
                     cin >> password;
-                    if(myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).get_password() == password) {
+                    if(correctPassword == password) {
                         hasPassword = true;
                         break;
                     } else if(i < 2) {
@@ -83,8 +94,8 @@ int main()
                     cout << "You have run out of attempts to enter in your password. Try again later." << endl;
                     break;
                 }
-                		long acct_num = myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).getNumber();
-				myBankPtr->closeBankAccount(firstName + " " + lastName,dob,password,acct_num);
+                //long acct_num = myBankPtr->findByNameAndDOB(firstName + " " + lastName,dob).getNumber();
+				myBankPtr->closeBankAccount(firstName + " " + lastName,dob,password,account_number);
                 //goAgain = false;
                 cout << "Account Closed" << endl;
                 //cout << myBankPtr->getAccounts().size() << endl;
@@ -274,6 +285,31 @@ int main()
                 cout << "Enter the new owner's last name: ";
                 cin >> newLastName;
                 myBankPtr->getPtrByNameAndDOB(firstName + " " + lastName,dob)->change_owner(newFirstName + " " + newLastName);
+                break;
+            }
+            case 8: {
+                cout << "Enter your account number:";
+                cin >> account_number;
+				bool hasPassword = false;
+				string password;
+				for(int i = 0; i < 3; i++) {
+                    cout << "Enter your Password: ";
+                    cin >> password;
+                    if(myBankPtr->findByNumber(account_number).get_password() == password) {
+                        hasPassword = true;
+                        break;
+                    } else if(i < 2) {
+                        cout << "You have entered your password incorrectly." << endl;
+                        cout << "You have ";
+                        cout << 2 - i;
+                        cout << " attempts left before you must try again later." << endl;
+                    }
+                }
+                if(!hasPassword) {
+                    cout << "You have run out of attempts to enter in your password. Try again later." << endl;
+                    break;
+                }
+                cout << "Your balance is: " << myBankPtr->findByNumber(account_number).get_balance() << endl;
                 break;
             }
             default: {
