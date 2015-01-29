@@ -3,6 +3,7 @@
 #include <vector>
 //#include "bankAccount.h"
 #include <cstdlib>
+#include <fstream>
 using namespace std;
 
 /*long getBankAccountNumber() {
@@ -13,10 +14,39 @@ void displayMessage(){
 		string s = "Hello, and welcome to Rui's Bank. Press any key to Continue:\n[1] Open New Bank Account\n[2] Close Your Bank Account\n[3] Deposit Money\n[4] Withdraw Money\n[5] Change Your Password\n[6] Transfer Money to Another Account\n[7] Change Account Ownership\n[8] Check Balance\nPress any other key to exit.\n";
 		cout << s;
 }
+void loadData(Bank* myBankPtr){
+    ifstream file ("database.log");
+    string first_name, last_name, DOB, password, number, balance;
+    int i;
+    file >> first_name >> last_name >> DOB >> password >> number >> balance;
+
+    while(first_name != "stop") {
+        myBankPtr->openBankAccount(first_name + " " + last_name, DOB, password, stol(number));
+        myBankPtr->deposit(stol(number), stod(balance));
+        file >> first_name >> last_name >> DOB >> password >> number >> balance;
+    }
+
+    file.close();
+}
+
+void saveData(Bank* myBankPtr){
+    ofstream file ("database.log");
+    for (int i = 0; i < myBankPtr->getAccounts().size(); i++) {
+        file << myBankPtr->getAccounts()[i].get_owner() << endl;
+        file << myBankPtr->getAccounts()[i].get_owner_DOB() << endl;
+        file << myBankPtr->getAccounts()[i].get_password() << endl;
+        file << myBankPtr->getAccounts()[i].getNumber() << endl;
+        file << myBankPtr->getAccounts()[i].get_balance() << endl;
+    }
+    file << "stop" << endl;
+    file.close();
+}
+
 int main()
 {
     Bank* myBankPtr = new Bank("Nameless Bank",100000000000, true);
-    long account_number = 10000000;
+    loadData(myBankPtr);
+    long account_number = 10000000 + myBankPtr->getAccounts().size();
     bool goAgain = true;
     do{
             displayMessage();
@@ -316,8 +346,9 @@ int main()
                 goAgain = false;
                 break;
             }
-            }
-		}while(goAgain);
+        }
+    }while(goAgain);
+    saveData(myBankPtr)
     //cout << myBankPtr->getBalance() << endl;
     //myBankPtr->openBankAccount("Michael Feffer","12-18-1995","#sol33t",1234567890);
     //cout << ((myBankPtr->getAccounts())[0]).get_owner() << endl;
